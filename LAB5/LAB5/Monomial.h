@@ -43,7 +43,7 @@ Monomial::Monomial(string mstr, int maxPower, int maxCount)
 		for (int i = 0; i < maxCount; i++)
 		{
 			power[i] = 0;
-			var_i = "x" + toString(i + 1);  // —чет индексов переменных начинаетс€ с 1
+			var_i = "x" + toString(i + 1);  // —чет индексов переменных начинаетс€ с 1, вот  так вот!
 			l = mstr.find(var_i);
 			if (l >= 0)
 			{
