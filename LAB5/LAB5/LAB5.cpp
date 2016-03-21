@@ -10,22 +10,38 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	Monomial A(5, 8);
 
-	Monomial B("x1^2x2^3", 4, 4); // coeff = 1, fold = 176
+	Monomial B("x1^2x2^3", 5, 12); // coeff = 1, fold = 176
 
-	Monomial C("-12x2^2x3x1^11x4^5", 12, 5); // coeff = -12, fold = 231756
+	Monomial C("-12x2^2x3x1^11x4^5", 5, 12); // coeff = -12, fold = 231756
 
-	Monomial D("3x1^5", 5, 3); // coeff = 3, fold = ((0+5)*5+0)*5+0 = 125
+	Monomial D("3x1^5", 5, 12); // coeff = 3, fold = ((0+5)*5+0)*5+0 = 125
 
-	cout << B.ToString(4, 4) << endl;
-	cout << C.ToString(12, 5) << endl;
-	cout << D.ToString(5, 3) << endl;
+	cout << B.ToString(5, 12) << endl;
+	cout << C.ToString(5, 12) << endl;
+	cout << D.ToString(5, 12) << endl;
 
-	A.ToString(5, 8);
+	//A.ToString(5, 8);
 
 	CircularList E;
 
 	E.AddMonomial(&C);
 	E.AddMonomial(&B);
+
+	CircularList F(E);
+
+	CircularList G;
+	
+	G = E;
+
+	//E.AddMonomial(4, 123);
+
+	E.AddMonomial("7x1^2x4^5", 5, 12);
+
+	E = E * 2;
+
+	cout << "----------------" << endl;
+	cout << E.ToString(5, 12) << endl;
+	cout << "Note: max fold length is " << INT_MAX << endl;
 
 	system("pause");
 	return 0;

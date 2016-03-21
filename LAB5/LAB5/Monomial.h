@@ -12,7 +12,7 @@ private:
 	Monomial *next; // Указатель на следующий моном
 public:
 	Monomial(int coeff = 0, int fold = -1); // Конструктор
-	Monomial(string mstr, int maxPower, int maxCount); // Конструктор
+	Monomial(string mstr, int maxCount, int maxPower); // Конструктор
 	Monomial(const Monomial &m); // Конструктор копирования
 	~Monomial() {next = 0;}; // Деструктор !!!
 	Monomial &operator=(const Monomial &m); // Оператор присваивания
@@ -22,12 +22,12 @@ public:
 	void SetFold(int fld) {fold = fld;}; // Установка свертки
 	Monomial *GetNext() const {return next;}; // Получение следующего монома
 	void SetNext(Monomial *m) {next = m;}; // Установка следующего монома
-	string ToString(int maxPower = 10, int maxCount = 10); // Перевод монома в строку
+	string ToString(int maxCount = 10, int maxPower = 10); // Перевод монома в строку
 };
 
 Monomial::Monomial(int coeff, int fold) : coeff(coeff), fold(fold), next(0) {}
 
-Monomial::Monomial(string mstr, int maxPower, int maxCount)
+Monomial::Monomial(string mstr, int maxCount, int maxPower)
 {
 	int * power = new int [maxCount];
 	int l = 0;
@@ -93,7 +93,7 @@ Monomial &Monomial::operator=(const Monomial &m)
 	return *this;
 }
 
-string Monomial::ToString(int maxPower, int maxCount)
+string Monomial::ToString(int maxCount, int maxPower)
 {
 	int power = 0;
 	int foldTmp = fold;

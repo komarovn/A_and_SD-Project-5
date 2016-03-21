@@ -148,6 +148,8 @@ string CircularList::ToString(int maxCount, int maxPower)
 	Monomial *current = first->GetNext();
 	while (current->GetFold() != -1)
 	{
+		if (strcmp(s.c_str(), "")) // added
+				s += " + "; // added
 		s += current->ToString(maxCount, maxPower);
 		current = current->GetNext();
 	}
