@@ -20,7 +20,7 @@ public:
 	void SetCoeff(int cff) {coeff = cff;}; // Установка коэффициента
 	int GetFold() const {return fold;}; // Получение свертки
 	void SetFold(int fld) {fold = fld;}; // Установка свертки
-	Monomial GetNext() const {return *next;}; // Получение следующего монома
+	Monomial *GetNext() const {return next;}; // Получение следующего монома
 	void SetNext(Monomial *m) {next = m;}; // Установка следующего монома
 	string ToString(int maxPower = 10, int maxCount = 10); // Перевод монома в строку
 };
