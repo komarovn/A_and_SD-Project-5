@@ -52,8 +52,7 @@ CircularList::~CircularList()
 
 CircularList &CircularList::operator=(const CircularList &cl)
 {
-	Monomial *tmp = first->GetNext();
-	//delete tmp;
+	Monomial *tmp = first->GetNext(); //delete tmp;
 	first = 0;
 	this->CircularList::CircularList(cl);
 	return *this;

@@ -22,6 +22,7 @@ public:
 	void SetFold(int fld) {fold = fld;}; // Установка свертки
 	Monomial *GetNext() const {return next;}; // Получение следующего монома
 	void SetNext(Monomial *m) {next = m;}; // Установка следующего монома
+	Monomial MultiplicityOfMonomials(const Monomial &m, int maxPower); // Умножение мономов
 	string ToString(int maxCount = 10, int maxPower = 10); // Перевод монома в строку
 };
 
@@ -91,6 +92,26 @@ Monomial &Monomial::operator=(const Monomial &m)
 	fold = m.fold;
 	next = 0;
 	return *this;
+}
+
+Monomial Monomial::MultiplicityOfMonomials(const Monomial &m, int maxPower)
+{
+	Monomial tmp;
+	tmp.coeff = coeff * m.coeff;
+	int foldFirst = this->fold;
+	int foldSecond = m.fold;
+	while (foldFirst != 0 && foldSecond != 0)
+	{
+		int d1 = foldFirst % maxPower;
+		int d2 = foldSecond % maxPower;
+		if (d1 + d2 > maxPower)
+			//throw exception();
+			tmp.coeff = 0; // Error!!!
+		foldFirst /= maxPower;
+		foldSecond /= maxPower;
+	}
+	tmp.fold = fold + m.fold;
+	return tmp;
 }
 
 string Monomial::ToString(int maxCount, int maxPower)
