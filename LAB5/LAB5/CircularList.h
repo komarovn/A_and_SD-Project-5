@@ -15,8 +15,6 @@ public:
 	void AddMonomial(Monomial *m); // Добавление монома
 	void AddMonomial(int coeff, int fold); // Добавление монома, заданного сверткой и коэффициентом
 	void AddMonomial(string mstr, int maxCount, int maxPower); // Добавление монома, заданного в виде строки
-	void DeleteMonomial(Monomial *m); // Удаление монома
-	void InsertMonomial(Monomial *m, Monomial *after); // Вставка монома
 	CircularList operator+(const CircularList &cl) const; // Оператор сложения
 	CircularList operator-(const CircularList &cl) const; // Оператор вычитания
 	CircularList operator*(const CircularList &cl) const; // Оператор умножения полиномов
@@ -55,7 +53,7 @@ CircularList::~CircularList()
 CircularList &CircularList::operator=(const CircularList &cl)
 {
 	Monomial *tmp = first->GetNext();
-	delete tmp;
+	//delete tmp;
 	first = 0;
 	this->CircularList::CircularList(cl);
 	return *this;
@@ -101,16 +99,6 @@ void CircularList::AddMonomial(string mstr, int maxCount, int maxPower)
 	AddMonomial(tmp);
 }
 
-void CircularList::DeleteMonomial(Monomial *m)
-{
-
-}
-
-void CircularList::InsertMonomial(Monomial *m, Monomial *after)
-{
-
-}
-
 CircularList CircularList::operator+(const CircularList &cl) const
 {
 	CircularList tmp(*this);
@@ -125,7 +113,10 @@ CircularList CircularList::operator+(const CircularList &cl) const
 	return tmp;
 }
 
-// CircularList CircularList::operator-(const CircularList &cl) const
+CircularList CircularList::operator-(const CircularList &cl) const
+{
+	return (*this + cl * (-1));
+}
 
 //CircularList CircularList::operator*(const CircularList &cl) const
 
