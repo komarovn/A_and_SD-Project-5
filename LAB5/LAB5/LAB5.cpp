@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Monomial K("x1^2x2^3", 2, 8);
 	Monomial L("3x1^5", 2, 8);
 
-	H = K.MultiplicityOfMonomials(L, 8);
+	H = K.MultiplicationOfMonomials(L, 8);
 
 	cout << B.ToString(5, 12) << endl;
 	cout << C.ToString(5, 12) << endl;
