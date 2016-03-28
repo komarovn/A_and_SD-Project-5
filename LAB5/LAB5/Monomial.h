@@ -22,7 +22,7 @@ public:
 	void SetFold(int fld) {fold = fld;}; // Установка свертки
 	Monomial *GetNext() const {return next;}; // Получение следующего монома
 	void SetNext(Monomial *m) {next = m;}; // Установка следующего монома
-	Monomial MultiplicityOfMonomials(const Monomial &m, int maxPower); // Умножение мономов
+	Monomial MultiplicationOfMonomials(const Monomial &m, int maxPower); // Умножение мономов
 	string ToString(int maxCount = 10, int maxPower = 10); // Перевод монома в строку
 };
 
@@ -94,7 +94,7 @@ Monomial &Monomial::operator=(const Monomial &m)
 	return *this;
 }
 
-Monomial Monomial::MultiplicityOfMonomials(const Monomial &m, int maxPower)
+Monomial Monomial::MultiplicationOfMonomials(const Monomial &m, int maxPower)
 {
 	Monomial tmp;
 	tmp.coeff = coeff * m.coeff;

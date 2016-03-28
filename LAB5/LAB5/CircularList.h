@@ -7,6 +7,7 @@ class CircularList
 {
 private:
 	Monomial *first;
+	
 public:
 	CircularList(); // Конструктор
 	CircularList(const CircularList &cl); // Конструктор копирования 
@@ -17,7 +18,8 @@ public:
 	void AddMonomial(string mstr, int maxCount, int maxPower); // Добавление монома, заданного в виде строки
 	CircularList operator+(const CircularList &cl) const; // Оператор сложения
 	CircularList operator-(const CircularList &cl) const; // Оператор вычитания
-	CircularList operator*(const CircularList &cl) const; // Оператор умножения полиномов
+	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
+	CircularList MultiplicationOfCls(const CircularList &cl, int maxPower); // Умножение полиномов
 	CircularList operator*(int k) const; // Оператор умножения полинома на число
 	string ToString(int maxCount, int maxPower); // Перевод полинома в строку
 };
@@ -122,14 +124,42 @@ CircularList CircularList::operator-(const CircularList &cl) const
 CircularList CircularList::operator*(int k) const
 {
 	CircularList tmp(*this);
-	Monomial *current;
-	current = tmp.first->GetNext();
+	Monomial *current = tmp.first->GetNext();
 	while (current != tmp.first)
 	{
 		current->SetCoeff(current->GetCoeff() * k);
 		current = current->GetNext();
 	}
 	return tmp;
+}
+
+CircularList CircularList::MultiplicationOfClAndMonomial(const Monomial &m, int maxPower)
+{
+	CircularList clBefore(*this);
+	CircularList clAfter;
+	Monomial *current = clBefore.first->GetNext();
+	Monomial *currentCopy;
+	while (current != clBefore.first)
+	{
+		currentCopy = new Monomial(*current);
+		*currentCopy = current->MultiplicationOfMonomials(m, maxPower);
+		clAfter.AddMonomial(currentCopy);
+		current = current->GetNext();
+	}
+	return clAfter;
+}
+
+CircularList CircularList::MultiplicationOfCls(const CircularList &cl, int maxPower)
+{
+	CircularList clBefore(*this);
+	CircularList clAfter;
+	Monomial *current = cl.first->GetNext();
+	while (current != cl.first)
+	{
+		clAfter = clAfter + clBefore.MultiplicationOfClAndMonomial(*current, maxPower);
+		current = current->GetNext();
+	} 
+	return clAfter;
 }
 
 string CircularList::ToString(int maxCount, int maxPower)

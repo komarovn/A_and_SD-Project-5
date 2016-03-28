@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	Monomial K("x1^2x2^3", 2, 8);
 	Monomial L("3x1^5", 2, 8);
 
-	H = K.MultiplicityOfMonomials(L, 8);
+	H = K.MultiplicationOfMonomials(L, 8);
 
 	cout << B.ToString(5, 12) << endl;
 	cout << C.ToString(5, 12) << endl;
@@ -47,10 +47,22 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	E = E * 2;
 
+	CircularList M;
+	M.AddMonomial("x1^2x2x3^3", 3, 9);
+	//M.AddMonomial("x1x2^5", 3, 9);
+	M.AddMonomial("x1x2^4", 3, 9);
+
+	Monomial N("x1^2x2^2x3^4", 3, 9);
+
+	//M = M.MultiplicationOfClAndMonomial(N, 9);
+
+	M = M.MultiplicationOfCls(M, 9);
+
 	//E = E + E;
 
 	cout << "----------------" << endl;
 	cout << E.ToString(5, 12) << endl;
+	cout << M.ToString(3, 9) << endl;
 	cout << "Note: max fold length is " << INT_MAX << endl;
 
 	system("pause");
