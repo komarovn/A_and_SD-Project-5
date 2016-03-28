@@ -19,6 +19,7 @@ public:
 	CircularList operator+(const CircularList &cl) const; // Оператор сложения
 	CircularList operator-(const CircularList &cl) const; // Оператор вычитания
 	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
+	CircularList MultiplicationOfCls(const CircularList &cl, int maxPower); // Умножение полиномов
 	CircularList operator*(int k) const; // Оператор умножения полинома на число
 	string ToString(int maxCount, int maxPower); // Перевод полинома в строку
 };
@@ -144,7 +145,20 @@ CircularList CircularList::MultiplicationOfClAndMonomial(const Monomial &m, int 
 		*currentCopy = current->MultiplicationOfMonomials(m, maxPower);
 		clAfter.AddMonomial(currentCopy);
 		current = current->GetNext();
-	};
+	}
+	return clAfter;
+}
+
+CircularList CircularList::MultiplicationOfCls(const CircularList &cl, int maxPower)
+{
+	CircularList clBefore(*this);
+	CircularList clAfter;
+	Monomial *current = cl.first->GetNext();
+	while (current != cl.first)
+	{
+		clAfter = clAfter + clBefore.MultiplicationOfClAndMonomial(*current, maxPower);
+		current = current->GetNext();
+	} 
 	return clAfter;
 }
 
