@@ -47,10 +47,19 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	E = E * 2;
 
+	CircularList M;
+	M.AddMonomial("x1^2x2x3^3", 3, 9);
+	M.AddMonomial("x1x2^5", 3, 9);
+
+	Monomial N("x1^2x2^2x3^4", 3, 9);
+
+	M = M.MultiplicationOfClAndMonomial(N, 9);
+
 	//E = E + E;
 
 	cout << "----------------" << endl;
 	cout << E.ToString(5, 12) << endl;
+	cout << M.ToString(3, 9) << endl;
 	cout << "Note: max fold length is " << INT_MAX << endl;
 
 	system("pause");

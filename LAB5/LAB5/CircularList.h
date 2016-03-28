@@ -7,7 +7,7 @@ class CircularList
 {
 private:
 	Monomial *first;
-	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
+	
 public:
 	CircularList(); // Конструктор
 	CircularList(const CircularList &cl); // Конструктор копирования 
@@ -18,7 +18,7 @@ public:
 	void AddMonomial(string mstr, int maxCount, int maxPower); // Добавление монома, заданного в виде строки
 	CircularList operator+(const CircularList &cl) const; // Оператор сложения
 	CircularList operator-(const CircularList &cl) const; // Оператор вычитания
-	
+	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
 	CircularList operator*(int k) const; // Оператор умножения полинома на число
 	string ToString(int maxCount, int maxPower); // Перевод полинома в строку
 };
@@ -123,8 +123,7 @@ CircularList CircularList::operator-(const CircularList &cl) const
 CircularList CircularList::operator*(int k) const
 {
 	CircularList tmp(*this);
-	Monomial *current;
-	current = tmp.first->GetNext();
+	Monomial *current = tmp.first->GetNext();
 	while (current != tmp.first)
 	{
 		current->SetCoeff(current->GetCoeff() * k);
@@ -135,14 +134,18 @@ CircularList CircularList::operator*(int k) const
 
 CircularList CircularList::MultiplicationOfClAndMonomial(const Monomial &m, int maxPower)
 {
-	CircularList tmp = *this;
-	Monomial* current = tmp.first->GetNext(); //?
-	while (current != tmp.first)
+	CircularList clBefore(*this);
+	CircularList clAfter;
+	Monomial *current = clBefore.first->GetNext();
+	Monomial *currentCopy;
+	while (current != clBefore.first)
 	{
-		*current = current->MultiplicationOfMonomials(m, maxPower);
+		currentCopy = new Monomial(*current);
+		*currentCopy = current->MultiplicationOfMonomials(m, maxPower);
+		clAfter.AddMonomial(currentCopy);
 		current = current->GetNext();
 	};
-	return tmp;
+	return clAfter;
 }
 
 string CircularList::ToString(int maxCount, int maxPower)
