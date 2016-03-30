@@ -105,8 +105,7 @@ Monomial Monomial::MultiplicationOfMonomials(const Monomial &m, int maxPower)
 		int d1 = foldFirst % maxPower;
 		int d2 = foldSecond % maxPower;
 		if (d1 + d2 > maxPower)
-			//throw exception();
-			tmp.coeff = 0; // Error!!!
+			throw exception();
 		foldFirst /= maxPower;
 		foldSecond /= maxPower;
 	}
@@ -132,8 +131,8 @@ string Monomial::ToString(int maxCount, int maxPower)
 			x = x + toString(i + 1);
 			if (power > 1)
 				x = x + "^" + toString(power);
-			if (strcmp(res.c_str(), "")) // added
-				res = "*" + res ; // added
+			if (strcmp(res.c_str(), ""))
+				res = "*" + res ;
 			res = x + res;
 		};
 		foldTmp = foldTmp / maxPower;
@@ -144,7 +143,7 @@ string Monomial::ToString(int maxCount, int maxPower)
 		if (coeff == -1)
 			res = "-" + res;
 		else
-			res = toString(coeff) + "*" + res; // added "*"
+			res = toString(coeff) + "*" + res;
 	return res;
 }
 

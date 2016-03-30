@@ -7,7 +7,7 @@ class CircularList
 {
 private:
 	Monomial *first;
-	
+	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
 public:
 	CircularList(); // Конструктор
 	CircularList(const CircularList &cl); // Конструктор копирования 
@@ -18,7 +18,6 @@ public:
 	void AddMonomial(string mstr, int maxCount, int maxPower); // Добавление монома, заданного в виде строки
 	CircularList operator+(const CircularList &cl) const; // Оператор сложения
 	CircularList operator-(const CircularList &cl) const; // Оператор вычитания
-	CircularList MultiplicationOfClAndMonomial(const Monomial &m, int maxPower); // Умножение полинома на моном
 	CircularList MultiplicationOfCls(const CircularList &cl, int maxPower); // Умножение полиномов
 	CircularList operator*(int k) const; // Оператор умножения полинома на число
 	string ToString(int maxCount, int maxPower); // Перевод полинома в строку
@@ -49,12 +48,12 @@ CircularList::CircularList(const CircularList &cl)
 CircularList::~CircularList()
 {
 	Monomial *tmp = first->GetNext();
-	first = 0; //delete tmp;
+	first = 0;
 }
 
 CircularList &CircularList::operator=(const CircularList &cl)
 {
-	Monomial *tmp = first->GetNext(); //delete tmp;
+	Monomial *tmp = first->GetNext();
 	first = 0;
 	this->CircularList::CircularList(cl);
 	return *this;
@@ -105,7 +104,7 @@ CircularList CircularList::operator+(const CircularList &cl) const
 	CircularList tmp(*this);
 	Monomial *current = cl.first->GetNext();
 	Monomial *currentCopy;
-	while (current->GetFold() != -1) // ???
+	while (current->GetFold() != -1)
 	{
 		currentCopy = new Monomial(*current);
 		tmp.AddMonomial(currentCopy);
@@ -118,8 +117,6 @@ CircularList CircularList::operator-(const CircularList &cl) const
 {
 	return (*this + cl * (-1));
 }
-
-//CircularList CircularList::operator*(const CircularList &cl) const
 
 CircularList CircularList::operator*(int k) const
 {
@@ -168,8 +165,8 @@ string CircularList::ToString(int maxCount, int maxPower)
 	Monomial *current = first->GetNext();
 	while (current->GetFold() != -1)
 	{
-		if (strcmp(s.c_str(), "")) // added
-				s += " + "; // added
+		if (strcmp(s.c_str(), ""))
+				s += " + ";
 		s += current->ToString(maxCount, maxPower);
 		current = current->GetNext();
 	}
