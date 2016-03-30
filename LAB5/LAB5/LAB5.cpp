@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "iostream"
 
-#include "CircularList.h"
+#include "Polynomial.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -64,6 +64,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << E.ToString(5, 12) << endl;
 	cout << M.ToString(3, 9) << endl;
 	cout << "Note: max fold length is " << INT_MAX << endl;
+
+	Polynomial P("x1+x2x3-x2^2", 3, 5);
 
 	system("pause");
 	return 0;

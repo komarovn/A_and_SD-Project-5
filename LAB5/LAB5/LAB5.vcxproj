@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClInclude Include="CircularList.h" />
     <ClInclude Include="Monomial.h" />
+    <ClInclude Include="Polynomial.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stringconvert.h" />
     <ClInclude Include="targetver.h" />
