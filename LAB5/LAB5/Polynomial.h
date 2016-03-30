@@ -14,8 +14,13 @@ public:
 	Polynomial(string str = "", int maxCount = 10, int maxPower = 10); // Конструтор
 	Polynomial(const Polynomial &p) {}; // Конструктор копирования
 	~Polynomial() {}; // Деструктор
-	Polynomial &operator=(const Polynomial &p) {}; // Оператор присваивания
-
+	Polynomial &operator=(const Polynomial &p) {return *this;}; // Оператор присваивания
+	void Input(string str); // Добавление монома
+	string Output(); // Вывод полинома
+	Polynomial operator+(const Polynomial &p); // Оператор сложения
+	Polynomial operator-(const Polynomial &p); // Оператор вычитания
+	Polynomial operator*(int k); // Оператор умножения на число
+	Polynomial operator*(const Polynomial &p); // Оператор умножения
 };
 
 void Polynomial::stringDivision(string str, string *words, int &count) // Деление строки на слова
@@ -66,6 +71,44 @@ Polynomial::Polynomial(string str, int maxCount, int maxPower)
 			circList.AddMonomial(monomialsInStr[i], maxCount, maxPower);
 	};
 	delete [] monomialsInStr;
+}
+
+void Polynomial::Input(string str)
+{
+	circList.AddMonomial(str, maxCount, maxPower);
+}
+
+string Polynomial::Output()
+{
+	return circList.ToString(maxCount, maxPower);
+}
+
+Polynomial Polynomial::operator+(const Polynomial &p)
+{
+	Polynomial tmp(*this);
+	tmp.circList = circList + p.circList;
+	return tmp;
+}
+
+Polynomial Polynomial::operator-(const Polynomial &p)
+{
+	Polynomial tmp(*this);
+	tmp.circList = circList - p.circList;
+	return tmp;
+}
+
+Polynomial Polynomial::operator*(int k)
+{
+	Polynomial tmp(*this);
+	tmp.circList = circList * k;
+	return tmp;
+}
+
+Polynomial Polynomial::operator*(const Polynomial &p)
+{
+	Polynomial tmp(*this);
+	tmp.circList = circList.MultiplicationOfCls(p.circList, maxPower);
+	return tmp;
 }
 
 #endif

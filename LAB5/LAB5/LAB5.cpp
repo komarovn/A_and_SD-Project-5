@@ -12,6 +12,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Monomial B("x1^2x2^3", 5, 12); // coeff = 1, fold = 176
 
+	Monomial GH("x1", 5, 10); // coeff = 1, fold = 10000
+
 	Monomial C("-12x2^2x3x1^11x4^5", 5, 12); // coeff = -12, fold = 231756
 
 	Monomial D("3x1^5", 5, 12); // coeff = 3, fold = ((0+5)*5+0)*5+0 = 125
@@ -65,7 +67,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << M.ToString(3, 9) << endl;
 	cout << "Note: max fold length is " << INT_MAX << endl;
 
-	Polynomial P("x1+x2x3-x2^2", 3, 5);
+	Polynomial P("x1+x2x3-x2^2", 4, 5);
+	Polynomial Q("x1+x2x3-x2^2", 4, 5);
+
+	P = P * 4;
+
+	cout << P.Output() << endl;
 
 	system("pause");
 	return 0;

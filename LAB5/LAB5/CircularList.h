@@ -166,7 +166,12 @@ string CircularList::ToString(int maxCount, int maxPower)
 	while (current->GetFold() != -1)
 	{
 		if (strcmp(s.c_str(), ""))
-				s += " + ";
+		{
+			if (current->GetCoeff() < 0)
+				s = s + "";
+			else 
+				s = s + "+";
+		};
 		s += current->ToString(maxCount, maxPower);
 		current = current->GetNext();
 	}
