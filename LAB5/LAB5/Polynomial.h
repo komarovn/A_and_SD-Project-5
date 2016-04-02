@@ -12,9 +12,16 @@ private:
 	void stringDivision(string str, string *words, int &count); // Деление строки на слова
 public:
 	Polynomial(string str = "", int maxCount = 10, int maxPower = 10); // Конструтор
-	Polynomial(const Polynomial &p) {}; // Конструктор копирования
+	Polynomial(const Polynomial &p) {
+			maxCount = p.maxCount;
+		maxPower = p.maxPower;
+		circList = p.circList;}; // Конструктор копирования
 	~Polynomial() {}; // Деструктор
-	Polynomial &operator=(const Polynomial &p) {return *this;}; // Оператор присваивания
+	Polynomial &operator=(const Polynomial &p) {
+		maxCount = p.maxCount;
+		maxPower = p.maxPower;
+		circList = p.circList;
+		return *this;}; // Оператор присваивания
 	void Input(string str); // Добавление монома
 	string Output(); // Вывод полинома
 	Polynomial operator+(const Polynomial &p); // Оператор сложения
@@ -62,7 +69,7 @@ Polynomial::Polynomial(string str, int maxCount, int maxPower)
 {
 	this->maxCount = maxCount;
 	this->maxPower = maxPower;
-	string *monomialsInStr = new string[str.length() / 2 + 1];
+	string *monomialsInStr = new string[str.length() / 2 + 6];
 	int count = 0;
 	stringDivision(str, monomialsInStr, count);
 	for (int i = 0; i < count; i++)

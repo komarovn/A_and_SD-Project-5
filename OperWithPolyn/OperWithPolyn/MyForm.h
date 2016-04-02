@@ -400,18 +400,36 @@ namespace OperWithPolyn {
 				Q = new Polynomial("", maxCount, maxPower);
 			 }
 private: System::Void ADD_P_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 delete P;
+			 string strPol = SystemToStl(POLY_P->Text);
+			 P = new Polynomial(strPol, maxCount, maxPower);
 			 string strMonomial = SystemToStl(ADD_MON_P->Text);
 			 P->Input(strMonomial);
+			 POLY_P->Text = gcnew System::String(P->Output().c_str());
 		 }
 private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 delete Q;
+			 string strPol = SystemToStl(POLY_P->Text);
+			 Q = new Polynomial(strPol, maxCount, maxPower);
 			 string strMonomial = SystemToStl(ADD_MON_Q->Text);
 			 Q->Input(strMonomial);
+			 POLY_Q->Text = gcnew System::String(Q->Output().c_str());
 		 }
 private: System::Void ADDITION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 			 label3->Visible = true;
 			 label9->Visible = false;
 			 label10->Visible = false;
 			 label11->Visible = false;
+			 delete P;
+			 delete Q;
+			 string strPolP = SystemToStl(POLY_P->Text);
+			 string strPolQ = SystemToStl(POLY_Q->Text);
+			 P = new Polynomial(strPolP, maxCount, maxPower);
+			 Q = new Polynomial(strPolQ, maxCount, maxPower);
+			 Polynomial A("", maxCount, maxPower);
+			 A = *P + *Q;
+			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
+
 		 }
 private: System::Void SUBTRACTION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 			 label3->Visible = false;
