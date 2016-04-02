@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Polynomial.h"
+
 namespace OperWithPolyn {
 
 	using namespace System;
@@ -9,24 +11,27 @@ namespace OperWithPolyn {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	/// <summary>
-	/// Summary for MyForm
-	/// </summary>
+	Polynomial *P; // Полином P
+	Polynomial *Q; // Полином Q
+	int maxCount; // Максимальное количество переменных
+	int maxPower; // Максимальная степень
+
+	string SystemToStl(String ^s) // Перевод типа String ^ в тип string
+	{
+		using namespace Runtime::InteropServices;
+		const char* ptr = (const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+		return string(ptr);
+	};
+
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 	public:
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~MyForm()
 		{
 			if (components)
@@ -58,19 +63,15 @@ namespace OperWithPolyn {
 	private: System::Windows::Forms::Button^  MULT_K_BUT;
 	private: System::Windows::Forms::TextBox^  K_TXTBOX;
 	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::Label^  label11;
 	protected: 
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
@@ -98,6 +99,9 @@ namespace OperWithPolyn {
 			this->MULT_K_BUT = (gcnew System::Windows::Forms::Button());
 			this->K_TXTBOX = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// EXT_BUT
@@ -241,6 +245,7 @@ namespace OperWithPolyn {
 			this->ADD_P_BUT->TabIndex = 7;
 			this->ADD_P_BUT->Text = L"Добавить";
 			this->ADD_P_BUT->UseVisualStyleBackColor = true;
+			this->ADD_P_BUT->Click += gcnew System::EventHandler(this, &MyForm::ADD_P_BUT_Click);
 			// 
 			// ADD_Q_BUT
 			// 
@@ -250,6 +255,7 @@ namespace OperWithPolyn {
 			this->ADD_Q_BUT->TabIndex = 9;
 			this->ADD_Q_BUT->Text = L"Добавить";
 			this->ADD_Q_BUT->UseVisualStyleBackColor = true;
+			this->ADD_Q_BUT->Click += gcnew System::EventHandler(this, &MyForm::ADD_Q_BUT_Click);
 			// 
 			// ADDITION_BUT
 			// 
@@ -259,6 +265,7 @@ namespace OperWithPolyn {
 			this->ADDITION_BUT->TabIndex = 10;
 			this->ADDITION_BUT->Text = L"P + Q";
 			this->ADDITION_BUT->UseVisualStyleBackColor = true;
+			this->ADDITION_BUT->Click += gcnew System::EventHandler(this, &MyForm::ADDITION_BUT_Click);
 			// 
 			// SUBTRACTION_BUT
 			// 
@@ -268,6 +275,7 @@ namespace OperWithPolyn {
 			this->SUBTRACTION_BUT->TabIndex = 11;
 			this->SUBTRACTION_BUT->Text = L"P - Q";
 			this->SUBTRACTION_BUT->UseVisualStyleBackColor = true;
+			this->SUBTRACTION_BUT->Click += gcnew System::EventHandler(this, &MyForm::SUBTRACTION_BUT_Click);
 			// 
 			// MULT_BUT
 			// 
@@ -277,6 +285,7 @@ namespace OperWithPolyn {
 			this->MULT_BUT->TabIndex = 12;
 			this->MULT_BUT->Text = L"P * Q";
 			this->MULT_BUT->UseVisualStyleBackColor = true;
+			this->MULT_BUT->Click += gcnew System::EventHandler(this, &MyForm::MULT_BUT_Click);
 			// 
 			// MULT_K_BUT
 			// 
@@ -286,6 +295,7 @@ namespace OperWithPolyn {
 			this->MULT_K_BUT->TabIndex = 14;
 			this->MULT_K_BUT->Text = L"P * k";
 			this->MULT_K_BUT->UseVisualStyleBackColor = true;
+			this->MULT_K_BUT->Click += gcnew System::EventHandler(this, &MyForm::MULT_K_BUT_Click);
 			// 
 			// K_TXTBOX
 			// 
@@ -303,11 +313,41 @@ namespace OperWithPolyn {
 			this->label8->TabIndex = 23;
 			this->label8->Text = L"k =";
 			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(25, 249);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(261, 13);
+			this->label9->TabIndex = 24;
+			this->label9->Text = L"Результат вычитания из полинома P полинома Q:";
+			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(25, 249);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(211, 13);
+			this->label10->TabIndex = 25;
+			this->label10->Text = L"Результат умножения полиномов P и Q:";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(25, 249);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(241, 13);
+			this->label11->TabIndex = 26;
+			this->label11->Text = L"Результат умножения полинома P на число k:";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(660, 303);
+			this->Controls->Add(this->label11);
+			this->Controls->Add(this->label10);
+			this->Controls->Add(this->label9);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->K_TXTBOX);
 			this->Controls->Add(this->MULT_K_BUT);
@@ -348,7 +388,48 @@ namespace OperWithPolyn {
 				Graphics^ g = CreateGraphics();
 				g->DrawLine(Pens::LightGray, 0, 70, ClientSize.Width, 70);
 				ClientSize = Drawing::Size(ClientSize.Width, 303);
-
+				if (MAXCOUNT_TXTBOX->Text != "")
+					maxCount = Convert::ToInt32(MAXCOUNT_TXTBOX->Text);
+				else
+					maxCount = 0;
+				if (MAXPOWER_TXTBOX->Text != "")
+					maxPower = Convert::ToInt32(MAXPOWER_TXTBOX->Text);
+				else
+					maxPower = 0;
+				P = new Polynomial("", maxCount, maxPower);
+				Q = new Polynomial("", maxCount, maxPower);
 			 }
+private: System::Void ADD_P_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 string strMonomial = SystemToStl(ADD_MON_P->Text);
+			 P->Input(strMonomial);
+		 }
+private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 string strMonomial = SystemToStl(ADD_MON_Q->Text);
+			 Q->Input(strMonomial);
+		 }
+private: System::Void ADDITION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 label3->Visible = true;
+			 label9->Visible = false;
+			 label10->Visible = false;
+			 label11->Visible = false;
+		 }
+private: System::Void SUBTRACTION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 label3->Visible = false;
+			 label9->Visible = true;
+			 label10->Visible = false;
+			 label11->Visible = false;
+		 }
+private: System::Void MULT_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 label3->Visible = false;
+			 label9->Visible = false;
+			 label10->Visible = true;
+			 label11->Visible = false;
+		 }
+private: System::Void MULT_K_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 label3->Visible = false;
+			 label9->Visible = false;
+			 label10->Visible = false;
+			 label11->Visible = true;
+		 }
 };
 }
