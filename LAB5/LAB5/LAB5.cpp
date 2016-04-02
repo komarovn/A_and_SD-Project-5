@@ -8,6 +8,7 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	/*
 	Monomial A(5, 8);
 
 	Monomial B("x1^2x2^3", 5, 12); // coeff = 1, fold = 176
@@ -73,7 +74,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	P = P * 4;
 
 	cout << P.Output() << endl;
-
+	*/
+	 int maxCount = 3;
+	 int maxPower = 5;
+			Polynomial *P = new Polynomial("x1", maxCount, maxPower);
+			Polynomial *Q = new Polynomial("-x2", maxCount, maxPower);
+			 Polynomial A("", maxCount, maxPower);
+			 A = 
+				 (*P) + (*Q);
+			 cout << A.Output() << endl;
 	system("pause");
 	return 0;
 }
