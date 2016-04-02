@@ -344,7 +344,7 @@ namespace OperWithPolyn {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(660, 303);
+			this->ClientSize = System::Drawing::Size(660, 75);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);
 			this->Controls->Add(this->label9);
@@ -387,7 +387,7 @@ namespace OperWithPolyn {
 	private: System::Void INPUT_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 				Graphics^ g = CreateGraphics();
 				g->DrawLine(Pens::LightGray, 0, 70, ClientSize.Width, 70);
-				ClientSize = Drawing::Size(ClientSize.Width, 303);
+				ClientSize = Drawing::Size(ClientSize.Width, 241);
 				if (MAXCOUNT_TXTBOX->Text != "")
 					maxCount = Convert::ToInt32(MAXCOUNT_TXTBOX->Text);
 				else
@@ -422,6 +422,7 @@ private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs
 			 POLY_Q->Text = gcnew System::String(Q->Output().c_str());
 		 }
 private: System::Void ADDITION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 ClientSize = Drawing::Size(ClientSize.Width, 303);
 			 label3->Visible = true;
 			 label9->Visible = false;
 			 label10->Visible = false;
@@ -438,6 +439,7 @@ private: System::Void ADDITION_BUT_Click(System::Object^  sender, System::EventA
 
 		 }
 private: System::Void SUBTRACTION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 ClientSize = Drawing::Size(ClientSize.Width, 303);
 			 label3->Visible = false;
 			 label9->Visible = true;
 			 label10->Visible = false;
@@ -453,6 +455,7 @@ private: System::Void SUBTRACTION_BUT_Click(System::Object^  sender, System::Eve
 			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
 private: System::Void MULT_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 ClientSize = Drawing::Size(ClientSize.Width, 303);
 			 label3->Visible = false;
 			 label9->Visible = false;
 			 label10->Visible = true;
@@ -468,6 +471,7 @@ private: System::Void MULT_BUT_Click(System::Object^  sender, System::EventArgs^
 			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
 private: System::Void MULT_K_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+			 ClientSize = Drawing::Size(ClientSize.Width, 303);
 			 label3->Visible = false;
 			 label9->Visible = false;
 			 label10->Visible = false;
@@ -476,7 +480,11 @@ private: System::Void MULT_K_BUT_Click(System::Object^  sender, System::EventArg
 			 string strPolP = SystemToStl(POLY_P->Text);
 			 P = new Polynomial(strPolP, maxCount, maxPower);
 			 Polynomial A("", maxCount, maxPower);
-			 int k = Convert::ToInt32(K_TXTBOX->Text);
+			 int k;
+			 if (K_TXTBOX->Text != "")
+				 k = Convert::ToInt32(K_TXTBOX->Text);
+			 else
+				 k = 0;
 			 A = *P * k;
 			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
