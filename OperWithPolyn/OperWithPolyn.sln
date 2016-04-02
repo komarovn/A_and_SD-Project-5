@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OperWithPolyn", "OperWithPolyn\OperWithPolyn.vcxproj", "{266C3CB6-640D-4236-BAB3-FD34DA618754}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{266C3CB6-640D-4236-BAB3-FD34DA618754}.Debug|Win32.ActiveCfg = Debug|Win32
+		{266C3CB6-640D-4236-BAB3-FD34DA618754}.Debug|Win32.Build.0 = Debug|Win32
+		{266C3CB6-640D-4236-BAB3-FD34DA618754}.Release|Win32.ActiveCfg = Release|Win32
+		{266C3CB6-640D-4236-BAB3-FD34DA618754}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
