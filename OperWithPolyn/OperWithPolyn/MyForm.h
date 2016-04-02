@@ -404,7 +404,10 @@ private: System::Void ADD_P_BUT_Click(System::Object^  sender, System::EventArgs
 			 string strPol = SystemToStl(POLY_P->Text);
 			 P = new Polynomial(strPol, maxCount, maxPower);
 			 string strMonomial = SystemToStl(ADD_MON_P->Text);
-			 P->Input(strMonomial);
+			 if (ADD_MON_P->Text != "")
+				 P->Input(strMonomial);
+			 else
+				 ADD_MON_P->Text = "Îøèáêà";
 			 POLY_P->Text = gcnew System::String(P->Output().c_str());
 		 }
 private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -412,7 +415,10 @@ private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs
 			 string strPol = SystemToStl(POLY_P->Text);
 			 Q = new Polynomial(strPol, maxCount, maxPower);
 			 string strMonomial = SystemToStl(ADD_MON_Q->Text);
-			 Q->Input(strMonomial);
+			 if (ADD_MON_Q->Text != "")
+				 Q->Input(strMonomial);
+			 else
+				 ADD_MON_Q->Text = "Îøèáêà";
 			 POLY_Q->Text = gcnew System::String(Q->Output().c_str());
 		 }
 private: System::Void ADDITION_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -436,18 +442,43 @@ private: System::Void SUBTRACTION_BUT_Click(System::Object^  sender, System::Eve
 			 label9->Visible = true;
 			 label10->Visible = false;
 			 label11->Visible = false;
+			 delete P;
+			 delete Q;
+			 string strPolP = SystemToStl(POLY_P->Text);
+			 string strPolQ = SystemToStl(POLY_Q->Text);
+			 P = new Polynomial(strPolP, maxCount, maxPower);
+			 Q = new Polynomial(strPolQ, maxCount, maxPower);
+			 Polynomial A("", maxCount, maxPower);
+			 A = *P - *Q;
+			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
 private: System::Void MULT_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 			 label3->Visible = false;
 			 label9->Visible = false;
 			 label10->Visible = true;
 			 label11->Visible = false;
+			 delete P;
+			 delete Q;
+			 string strPolP = SystemToStl(POLY_P->Text);
+			 string strPolQ = SystemToStl(POLY_Q->Text);
+			 P = new Polynomial(strPolP, maxCount, maxPower);
+			 Q = new Polynomial(strPolQ, maxCount, maxPower);
+			 Polynomial A("", maxCount, maxPower);
+			 A = *P * *Q;
+			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
 private: System::Void MULT_K_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 			 label3->Visible = false;
 			 label9->Visible = false;
 			 label10->Visible = false;
 			 label11->Visible = true;
+			 delete P;
+			 string strPolP = SystemToStl(POLY_P->Text);
+			 P = new Polynomial(strPolP, maxCount, maxPower);
+			 Polynomial A("", maxCount, maxPower);
+			 int k = Convert::ToInt32(K_TXTBOX->Text);
+			 A = *P * k;
+			 RESULT_TXTBOX->Text = gcnew System::String(A.Output().c_str());
 		 }
 };
 }

@@ -74,7 +74,7 @@ Polynomial::Polynomial(string str, int maxCount, int maxPower)
 	stringDivision(str, monomialsInStr, count);
 	for (int i = 0; i < count; i++)
 	{
-		if ((strcmp(monomialsInStr[i].c_str(), "-") != 0) && (strcmp(monomialsInStr[i].c_str(), "+") != 0))
+		if ((strcmp(monomialsInStr[i].c_str(), "-") != 0) && (strcmp(monomialsInStr[i].c_str(), "+") != 0) && (strcmp(monomialsInStr[i].c_str(), "") != 0))
 			circList.AddMonomial(monomialsInStr[i], maxCount, maxPower);
 	};
 	delete [] monomialsInStr;

@@ -78,7 +78,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	 int maxCount = 3;
 	 int maxPower = 5;
 			Polynomial *P = new Polynomial("x1", maxCount, maxPower);
-			Polynomial *Q = new Polynomial("x2", maxCount, maxPower);
+			Polynomial *Q = new Polynomial("-x2", maxCount, maxPower);
 			 Polynomial A("", maxCount, maxPower);
 			 A = 
 				 (*P) + (*Q);
