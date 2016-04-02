@@ -34,6 +34,8 @@ namespace OperWithPolyn {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^  EXT_BUT;
+	protected: 
 
 	private:
 		/// <summary>
@@ -48,18 +50,36 @@ namespace OperWithPolyn {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
+			this->EXT_BUT = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// EXT_BUT
+			// 
+			this->EXT_BUT->Location = System::Drawing::Point(569, 343);
+			this->EXT_BUT->Name = L"EXT_BUT";
+			this->EXT_BUT->Size = System::Drawing::Size(75, 23);
+			this->EXT_BUT->TabIndex = 0;
+			this->EXT_BUT->Text = L"Exit";
+			this->EXT_BUT->UseVisualStyleBackColor = true;
+			this->EXT_BUT->Click += gcnew System::EventHandler(this, &MyForm::EXT_BUT_Click);
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(656, 378);
+			this->Controls->Add(this->EXT_BUT);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Operations with Polynomials";
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+	private: System::Void EXT_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
+				 Close();
+			 }
 	};
 }
