@@ -412,7 +412,7 @@ private: System::Void ADD_P_BUT_Click(System::Object^  sender, System::EventArgs
 		 }
 private: System::Void ADD_Q_BUT_Click(System::Object^  sender, System::EventArgs^  e) {
 			 delete Q;
-			 string strPol = SystemToStl(POLY_P->Text);
+			 string strPol = SystemToStl(POLY_Q->Text);
 			 Q = new Polynomial(strPol, maxCount, maxPower);
 			 string strMonomial = SystemToStl(ADD_MON_Q->Text);
 			 if (ADD_MON_Q->Text != "")

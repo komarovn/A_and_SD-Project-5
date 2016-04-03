@@ -131,8 +131,8 @@ string Monomial::ToString(int maxCount, int maxPower)
 			x = x + toString(i + 1);
 			if (power > 1)
 				x = x + "^" + toString(power);
-			if (strcmp(res.c_str(), ""))
-				res = "*" + res ;
+			//if (strcmp(res.c_str(), ""))
+			//	res = "*" + res ;
 			res = x + res;
 		};
 		foldTmp = foldTmp / maxPower;
@@ -143,7 +143,7 @@ string Monomial::ToString(int maxCount, int maxPower)
 		if (coeff == -1)
 			res = "-" + res;
 		else
-			res = toString(coeff) + "*" + res;
+			res = toString(coeff) + res;
 	return res;
 }
 
