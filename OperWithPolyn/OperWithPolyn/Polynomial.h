@@ -95,7 +95,10 @@ void Polynomial::Input(string str)
 
 string Polynomial::Output()
 {
-	return circList.ToString(maxCount, maxPower);
+	string result = circList.ToString(maxCount, maxPower);
+	if (result == "")
+		result = "0";
+	return result;
 }
 
 Polynomial Polynomial::operator+(const Polynomial &p)
@@ -114,8 +117,12 @@ Polynomial Polynomial::operator-(const Polynomial &p)
 
 Polynomial Polynomial::operator*(int k)
 {
-	Polynomial tmp(*this);
-	tmp.circList = circList * k;
+	Polynomial tmp; 
+	if (k != 0)
+	{
+		tmp = *this;
+		tmp.circList = circList * k;
+	}
 	return tmp;
 }
 

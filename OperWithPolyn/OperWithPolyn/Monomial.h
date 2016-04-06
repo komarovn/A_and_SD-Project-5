@@ -105,7 +105,8 @@ Monomial Monomial::MultiplicationOfMonomials(const Monomial &m, int maxPower)
 		int d1 = foldFirst % maxPower;
 		int d2 = foldSecond % maxPower;
 		if (d1 + d2 > maxPower)
-			throw exception();
+			tmp.coeff = 0;
+			//throw exception();
 		foldFirst /= maxPower;
 		foldSecond /= maxPower;
 	}

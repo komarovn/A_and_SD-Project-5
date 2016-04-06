@@ -140,7 +140,8 @@ CircularList CircularList::MultiplicationOfClAndMonomial(const Monomial &m, int 
 	{
 		currentCopy = new Monomial(*current);
 		*currentCopy = current->MultiplicationOfMonomials(m, maxPower);
-		clAfter.AddMonomial(currentCopy);
+		if (currentCopy->GetCoeff() != 0)
+			clAfter.AddMonomial(currentCopy);
 		current = current->GetNext();
 	}
 	return clAfter;
